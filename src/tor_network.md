@@ -14,15 +14,21 @@ These circumvention tools are called "pluggable transports" or "bridges." They c
 
 | Pluggable Transport | Description                                                  |
 | ------------------- | ------------------------------------------------------------ |
-| Obfs3               | Obfs3 is a pluggable transport meant to make traffic look random and not like any other protocol. Although Obfs3 is not supported anymore, it can be used to obfuscate other traffic such as SSH traffic or VPN traffic. |
-| Obfs4               | It also makes Tor traffic look random while also preventing Obfs4 bridges from being found and censored through internet scanning, so they are less likely to be censored compared to Obfs3 bridges. |
-| meek                | Meek transports make traffic look like you are browsing a major website. For example, meek-azure makes it look like you're using Microsoft services instead of Tor. |
-| Snowflake           | Snowflake works by routing your traffic through volunteer-operated WebRTC proxies to make it look like you are on a video call instead of Tor. |
-| WebTunnel           | WebTunnel makes your Tor traffic look like HTTPS website traffic. |
+| [Obfs3]()           | Obfs3 is a pluggable transport meant to make traffic look random and not like any other protocol. Although Obfs3 is not supported anymore, it can be used to obfuscate other traffic such as SSH traffic or VPN traffic. |
+| [Obfs4]()           | It also makes Tor traffic look random while also preventing Obfs4 bridges from being found and censored through internet scanning, so they are less likely to be censored compared to Obfs3 bridges. |
+| [meek]()            | Meek transports make traffic look like you are browsing a major website. For example, meek-azure makes it look like you're using Microsoft services instead of Tor. |
+| [Snowflake]()       | Snowflake works by routing your traffic through volunteer-operated WebRTC proxies to make it look like you are on a video call instead of Tor. |
+| [WebTunnel]()       | WebTunnel makes your Tor traffic look like HTTPS website traffic. |
 
-## Privacy and security measures
+## Privacy and Security Measures
 
-WIP
+Tor network's communications are encrypted and secure, meaning your ISP (Internet Service Provider) cannot decrypt the content of the messages and data passing through. But they can detect that you are using Tor if it is not used with a pluggable transport such as Obfs4 or Snowflake, due to a few reasons:
+
+- [Traffic analysis]() can be used to detect and block Tor connections based on unique characteristics of Tor network's packets, such as packet sizes (Tor has a fixed length for its cell sizes), timing, and encrypted patterns.
+- [Deep Packet Inspection (DPI)]() can be used to inspect the fully encrypted data and find specific patterns associated with Tor network's communications.
+- Tor has a public list of its entry nodes and exit nodes, which can be easily blocked by firewalls.
+
+Also, if the Tor network is used to access the clearnet, meaning the destination of requests is not inside the Tor network (for example, duckduckgo.com is a clearnet, or normal internet website, and duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion is a Tor network website), the exit node will be able to see the data that it is passing to the destination. But this is less of a problem now that most websites use HTTPS for encryption, leaving only some small metadata for exit nodes to see. And also, when they see the data, they cannot know where it came from.
 
 ## Implementations
 
