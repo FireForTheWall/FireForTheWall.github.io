@@ -32,7 +32,16 @@ Also, if the Tor network is used to access the clearnet, meaning the destination
 
 ## Implementations
 
-WIP
+There are two official core implementations of Tor: one is the Tor implemented in the C programming language, and the other is Arti[^4] implemented in Rust. The Rust implementation is not fully ready yet, and it is suggested to use the C implementation for actual privacy reasons.
+
+Also, there are clients built based on these core implementations for different operating systems:
+
+| Implementation                                               | Description                                                  | Windows | Linux | Android | iOS  | macOS |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------- | ----- | ------- | ---- | ------ |
+| [C Tor](https://www.torproject.org/download/tor/)            | Core implementation of Tor, which can be used to run volunteer nodes, a server, or a client. | Yes     | Yes   | Yes     | No   | Yes    |
+| [Arti](https://crates.io/crates/arti)                        | Rust version of the C Tor implementation, *not ready to use yet.* | Yes     | Yes   | Yes     | No   | Yes    |
+| [Tor Browser](https://www.torproject.org/download/) (or "[Onion Browser](https://onionbrowser.com/)") | A hardened browser with fingerprint-resisting features and Tor network built-in. | Yes     | Yes   | Yes     | Yes  | Yes    |
+| [Orbot](https://orbot.app/en/download/)                      | A free and open-source front-end for Tor, allowing the use of Tor as a VPN or a proxy. | No      | No    | Yes     | Yes  | No     |
 
 ## How to use and set up
 
@@ -43,3 +52,4 @@ WIP
 [^1]: For more detailed information: [https://spec.torproject.org/intro/index.html](https://spec.torproject.org/intro/index.html)  
 [^2]: How Tor path and circuit work: [https://spec.torproject.org/path-spec/general-operation.html](https://spec.torproject.org/path-spec/general-operation.html)  
 [^3]: Pluggable transports specifications: [https://spec.torproject.org/pt-spec/index.html](https://spec.torproject.org/pt-spec/index.html)  
+[^4]: Announcing Arti: [https://blog.torproject.org/announcing-arti/](https://blog.torproject.org/announcing-arti/)
