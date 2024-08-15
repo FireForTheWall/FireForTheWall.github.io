@@ -1,8 +1,8 @@
 # Tor Network
 
-Tor, or "The Onion Router," is an overlay network (meaning it's a network built on top of another network, which in this case is the internet). The Tor Network isn't meant to be a censorship circumvention tool, but its design allows it to be used to bypass censorship as well. The main usage of this network is to enable its users to communicate anonymously within the network through layered routing and encryption.
+Tor, or "The Onion Router," is an overlay network (meaning it's a network built on top of another network, which in this case is the internet). The Tor Network isn't meant to be a censorship circumvention tool, but its design allows it to be used to bypass censorship as well. The main usage of this network is to enable its users to communicate anonymously within the network through layered routing and encryption. [^1]
 
-Tor works by routing traffic through a series of volunteer nodes. This series of nodes is called a circuit in the Tor network. In a circuit, your data is encrypted to a random node called the entry node, then your data is encrypted to another random node called the middle node, and finally, your data is passed to a random node called the exit node. The encrypted data is peeled to reveal its content and destination, but because of this routing, the source of the traffic is unknown.
+Tor works by routing traffic through a series of volunteer nodes. This series of nodes is called a circuit in the Tor network. In a circuit, your data is encrypted to a random node called the entry node, then your data is encrypted to another random node called the middle node, and finally, your data is passed to a random node called the exit node. The encrypted data is peeled to reveal its content and destination, but because of this routing, the source of the traffic is unknown. [^2]
 
 ## How it works to bypass censorship
 
@@ -10,7 +10,7 @@ Because of the Tor network's layered routing and exit nodes (which route the Tor
 
 The problem is that the Tor network's traffic is detectable by firewalls and can be censored. Also, the entry nodes are known and can be censored using [IP filtering]() or [DNS Spoofing]() techniques. Because of this problem, Tor features some circumvention tools to bypass blocked access to the Tor network.
 
-These circumvention tools are called "pluggable transports" or "bridges." They cannot usually be used directly to obfuscate normal traffic, and they must be used along with the Tor network (they can be used to obfuscate other traffic by some tweaks and modifications).
+These circumvention tools are called "pluggable transports" or "bridges." They cannot usually be used directly to obfuscate normal traffic, and they must be used along with the Tor network (they can be used to obfuscate other traffic by some tweaks and modifications). [^3]
 
 | Pluggable Transport | Description                                                  |
 | ------------------- | ------------------------------------------------------------ |
@@ -37,3 +37,9 @@ WIP
 ## How to use and set up
 
 WIP
+
+---
+
+[^1]: For more detailed information: [https://spec.torproject.org/intro/index.html](https://spec.torproject.org/intro/index.html)  
+[^2]: How Tor path and circuit work: [https://spec.torproject.org/path-spec/general-operation.html](https://spec.torproject.org/path-spec/general-operation.html)  
+[^3]: Pluggable transports specifications: [https://spec.torproject.org/pt-spec/index.html](https://spec.torproject.org/pt-spec/index.html)  
