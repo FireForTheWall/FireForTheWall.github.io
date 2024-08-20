@@ -6,9 +6,9 @@ Tor works by routing traffic through a series of volunteer nodes. This series of
 
 ## How it works to bypass censorship
 
-Because of the Tor network's layered routing and exit nodes (which route the Tor network's traffic to the [clearnet]()), Tor can act as a 3-layered VPN, meaning you will send your data to an entry node, and the data will be sent to the clearnet by an exit node that is very likely to have free access to the internet.
+Because of the Tor network's layered routing and exit nodes (which route the Tor network's traffic to the [clearnet](/appendix_a.md#clearnet)), Tor can act as a 3-layered VPN, meaning you will send your data to an entry node, and the data will be sent to the clearnet by an exit node that is very likely to have free access to the internet.
 
-The problem is that the Tor network's traffic is detectable by firewalls and can be censored. Also, the entry nodes are known and can be censored using [IP filtering]() or [DNS Spoofing]() techniques. Because of this problem, Tor features some circumvention tools to bypass blocked access to the Tor network.
+The problem is that the Tor network's traffic is detectable by firewalls and can be censored. Also, the entry nodes are known and can be censored using [IP filtering](/censorship_techniques/ip_filtering.md) or [DNS Spoofing](/censorship_techniques/dns_spoofing.md) techniques. Because of this problem, Tor features some circumvention tools to bypass blocked access to the Tor network.
 
 These circumvention tools are called "pluggable transports" or "bridges." They cannot usually be used directly to obfuscate normal traffic, and they must be used along with the Tor network (they can be used to obfuscate other traffic by some tweaks and modifications). [^3]
 
@@ -24,8 +24,8 @@ These circumvention tools are called "pluggable transports" or "bridges." They c
 
 Tor network's communications are encrypted and secure, meaning your ISP (Internet Service Provider) cannot decrypt the content of the messages and data passing through. But they can detect that you are using Tor if it is not used with a pluggable transport such as Obfs4 or Snowflake, due to a few reasons:
 
-- [Traffic analysis]() can be used to detect and block Tor connections based on unique characteristics of Tor network's packets, such as packet sizes (Tor has a fixed length for its cell sizes), timing, and encrypted patterns.
-- [Deep Packet Inspection (DPI)]() can be used to inspect the fully encrypted data and find specific patterns associated with Tor network's communications.
+- [Traffic analysis](/censorship_techniques/traffic_analysis.md) can be used to detect and block Tor connections based on unique characteristics of Tor network's packets, such as packet sizes (Tor has a fixed length for its cell sizes), timing, and encrypted patterns.
+- [Deep Packet Inspection (DPI)](/censorship_techniques/deep_packet_inspection.md) can be used to inspect the fully encrypted data and find specific patterns associated with Tor network's communications.
 - Tor has a public list of its entry nodes and exit nodes, which can be easily blocked by firewalls.
 
 Also, if the Tor network is used to access the clearnet, meaning the destination of requests is not inside the Tor network (for example, duckduckgo.com is a clearnet, or normal internet website, and duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion is a Tor network website), the exit node will be able to see the data that it is passing to the destination. But this is less of a problem now that most websites use HTTPS for encryption, leaving only some small metadata for exit nodes to see. And also, when they see the data, they cannot know where it came from.
