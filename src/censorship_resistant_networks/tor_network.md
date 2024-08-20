@@ -12,13 +12,13 @@ The problem is that the Tor network's traffic is detectable by firewalls and can
 
 These circumvention tools are called "pluggable transports" or "bridges." They cannot usually be used directly to obfuscate normal traffic, and they must be used along with the Tor network (they can be used to obfuscate other traffic by some tweaks and modifications). [^3]
 
-| Pluggable Transport | Description                                                  |
-| ------------------- | ------------------------------------------------------------ |
-| [Obfs3]()           | Obfs3 is a pluggable transport meant to make traffic look random and not like any other protocol. Although Obfs3 is not supported anymore, it can be used to obfuscate other traffic such as SSH traffic or VPN traffic. |
-| [Obfs4]()           | It also makes Tor traffic look random while also preventing Obfs4 bridges from being found and censored through internet scanning, so they are less likely to be censored compared to Obfs3 bridges. |
-| [meek]()            | Meek transports make traffic look like you are browsing a major website. For example, meek-azure makes it look like you're using Microsoft services instead of Tor. |
-| [Snowflake]()       | Snowflake works by routing your traffic through volunteer-operated WebRTC proxies to make it look like you are on a video call instead of Tor. |
-| [WebTunnel]()       | WebTunnel makes your Tor traffic look like HTTPS website traffic. |
+| Pluggable Transport                                          | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [Obfs3](/censorship_circumvention_protocols/pluggable_transports/obfs3.md) | Obfs3 is a pluggable transport meant to make traffic look random and not like any other protocol. Although Obfs3 is not supported anymore, it can be used to obfuscate other traffic such as SSH traffic or VPN traffic. |
+| [Obfs4](/censorship_circumvention_protocols/pluggable_transports/obfs4.md) | It also makes Tor traffic look random while also preventing Obfs4 bridges from being found and censored through internet scanning, so they are less likely to be censored compared to Obfs3 bridges. |
+| [meek](/censorship_circumvention_protocols/pluggable_transports/meek.md) | Meek transports make traffic look like you are browsing a major website. For example, meek-azure makes it look like you're using Microsoft services instead of Tor. |
+| [Snowflake](/censorship_circumvention_protocols/pluggable_transports/snowflake.md) | Snowflake works by routing your traffic through volunteer-operated WebRTC proxies to make it look like you are on a video call instead of Tor. |
+| [WebTunnel](/censorship_circumvention_protocols/pluggable_transports/webtunnel.md) | WebTunnel makes your Tor traffic look like HTTPS website traffic. |
 
 ## Privacy and Security Measures
 
