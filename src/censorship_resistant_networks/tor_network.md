@@ -43,7 +43,117 @@ Also, there are clients built based on these core implementations for different 
 | [Tor Browser](https://www.torproject.org/download/) (or "[Onion Browser](https://onionbrowser.com/)") | A hardened browser with fingerprint-resisting features and Tor network built-in. | Yes     | Yes   | Yes     | Yes  | Yes    |
 | [Orbot](https://orbot.app/en/download/)                      | A free and open-source front-end for Tor, allowing the use of Tor as a VPN or a proxy. | No      | No    | Yes     | Yes  | No     |
 
-## How to use and set up
+## How to Use and Set Up
+
+Tor Network can be used in several ways, including as a client, in which you will only be using the Tor network to communicate anonymously, as a server, in which you will run an onion address that other Tor network users can connect to and communicate with anonymously, and you can run volunteer nodes, in which you will be passing the network's data to other nodes and helping the network become faster, more secure, and more stable.
+
+This guide covers the client side and ways to retrieve Tor bridges (or pluggable transports), because that is what you need in order to bypass censorship.
+
+### Getting Pluggable Transports
+
+Public Tor bridges are available on BridgeDB, a website run by the Tor team to provide users with free pluggable transports. These pluggable transports are mainly run by volunteers.
+
+To obtain some bridges, you can go to [https://bridges.torproject.org](https://bridges.torproject.org), select the type of pluggable transport you need, and BridgeDB will provide you with a few bridges of that type.
+
+![Screenshot of BridgeDB website](/pictures/BridgeDB_screenshot.jpg)
+
+But the problem is that the BridgeDB website is likely to be censored as well. To address this issue, the Tor team has come up with alternative ways to get bridges from BridgeDB, one of which is through email.
+
+To get bridges via email, you need to send an email with an **empty subject** and a message body of **get transport obfs4** to [bridges@torproject.org](mailto:bridges@torproject.org). Note that your email provider should be either [Riseup](https://riseup.net/) or [Gmail](https://mail.google.com/); otherwise, you won't receive any bridges.
+
+Another way to get bridges is through their Telegram bot. The Tor team has recently launched a Telegram bot that gives users fresh bridges every time they start it. The bot is available at [@GetBridgesBot](https://t.me/GetBridgesBot) on Telegram.
+
+![Screenshot of GetBridgesBot](/pictures/GetBridgesBot_screenshot.jpg)
+
+### C Tor
+
+To connect to the Tor network using C Tor, you will need to download and install it first along with the obfs4proxy client to obfuscate the traffic and bypass the restrictions on Tor network communications.
+
+#### Linux
+
+In most Linux distributions, it will probably be available in the package managers under the name of the `tor` package. But if it doesn't exist in your repo, you may find a guide on building and installing it from the source code on Tor's community documents: [https://community.torproject.org/onion-services/setup/install/.](https://community.torproject.org/onion-services/setup/install/.)
+
+| **Linux Distribution** | **Command**                     |
+| ---------------------- | ------------------------------- |
+| Ubuntu / Debian        | `sudo apt-get install tor`      |
+| Fedora                 | [Tor's Official Guide](https://community.torproject.org/onion-services/setup/install/) |
+| Arch Linux [^5]        | `sudo pacman -S tor`            |
+| openSUSE               | `sudo zypper install tor`       |
+| Alpine Linux           | `sudo apk add tor`              |
+| Gentoo [^6]            | `sudo emerge --ask net-vpn/tor` |
+
+After installing Tor, you need to install obfs4proxy in order to make Tor capable of using obfs4 bridges.
+
+Obfs4proxy might not be available in all package managers under the same name, or at all:
+
+| **Linux Distribution** | **Command**                            |
+| ---------------------- | -------------------------------------- |
+| Ubuntu / Debian        | `sudo apt-get install obfs4proxy`      |
+| Arch Linux             | `yay -S obfs4proxy`                    |
+
+If you can't find the `obfs4proxy` package for your distribution, you can compile and install it from its source:
+
+1. Install dependencies: `go` and `git` packages are needed.
+
+2. Clone the repository:
+
+   ```bash
+   git clone https://gitlab.com/yawning/obfs4.git
+   ```
+
+3. Switch directory to the cloned repository:
+
+   ```bash
+   cd obfs4
+   ```
+
+4. Build and install from the source code:
+
+   ```bash
+   go build -o obfs4proxy/obfs4proxy ./obfs4proxy
+   cp obfs4proxy /usr/bin/obfs4proxy
+   ```
+
+Now you can configure C Tor to use obfs4proxy as its pluggable transport:
+
+1. C Tor's configuration file is usually located at `/etc/tor/torrc`, and that is the file you want to edit. Open the file `/etc/tor/torrc` with any editor you have, and make sure to open it with root permission to be able to write on it:
+
+   ```bash
+   # For example gedit editor:
+   sudo gedit /etc/tor/torrc
+   ```
+
+2. Go to the end of the file and add these lines. Make sure to replace the `Bridge <Bridge You Retrieved from BridgeDB>` with the actual bridge you retrieved, for example: `obfs4 141.95.106.58:19053 4283C0BA9294F931BE3B274C1DF6A7C1B67CD36A cert=TajDhn51Jd3NeF0azqY8oFYCeA/oha/UWod9pqiV9igDbwqfV1fO2uLC8Sa9Xa+3qZEcLA iat-mode=0`:
+
+   ```
+   UseBridges 1
+   Bridge <Bridge You Retrieved from BridgeDB 1>
+   Bridge <Bridge You Retrieved from BridgeDB 2>
+   Bridge <Bridge You Retrieved from BridgeDB 3>
+   ClientTransportPlugin obfs4 exec /usr/bin/obfs4proxy
+   ```
+
+3. Start the Tor service:
+
+   ```bash
+   systemctl start tor
+   ```
+
+After starting Tor, it will create a SOCKS5 and SOCKS4 proxy on the address `127.0.0.1` and port `9050` (by default), which can be set as proxies on the system, different apps, etc., to bypass censorship.
+
+#### Windows
+
+WIP
+
+#### MacOs
+
+WIP
+
+### Tor Browser
+
+WIP
+
+### Orbot
 
 WIP
 
@@ -53,3 +163,5 @@ WIP
 [^2]: How Tor path and circuit work: [https://spec.torproject.org/path-spec/general-operation.html](https://spec.torproject.org/path-spec/general-operation.html)  
 [^3]: Pluggable transports specifications: [https://spec.torproject.org/pt-spec/index.html](https://spec.torproject.org/pt-spec/index.html)  
 [^4]: Announcing Arti: [https://blog.torproject.org/announcing-arti/](https://blog.torproject.org/announcing-arti/)
+[^5]: Archlinux Wiki on installing tor: [https://wiki.archlinux.org/title/Tor](https://wiki.archlinux.org/title/Tor)
+[^6]: Gentoo Wiki on installing tor: [https://wiki.gentoo.org/wiki/Tor](https://wiki.gentoo.org/wiki/Tor)
