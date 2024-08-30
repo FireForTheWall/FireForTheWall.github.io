@@ -155,7 +155,30 @@ WIP
 
 ### Orbot
 
-WIP
+Orbot is a project by the Guardian Project, fully open source and released under the BSD-3-Clause License, which is a free license. Orbot is a VPN and Proxy app that tunnels network traffic through the TOR Network.
+
+To use Orbot, you first need to download and install it for your device architecture. Here is a list for downloading and installing on **Android Devices**:
+
+| Source          | Description                                                  | URL                                                          |
+| --------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Github Releases | Download the APK directly from Guardian Project's GitHub releases. | https://github.com/guardianproject/orbot/releases            |
+| Google Play     | Install from Google Play.                                    | https://play.google.com/store/apps/details?id=org.torproject.android&hl=en_US |
+| F-Droid         | Install from F-Droid (Recommended as it provides more privacy). | https://f-droid.org/packages/org.torproject.android          |
+
+**Note:** Be aware that to install Orbot from F-Droid, you will need to add the Guardian Project's repository to your F-Droid. For more information, check [Guardian Project's guide](https://guardianproject.info/fdroid/).
+
+Here is a list for installing Orbot on **iOS Devices**:
+
+| Source          | Description                                                | URL                                                     |
+| --------------- | ---------------------------------------------------------- | ------------------------------------------------------- |
+| Github Releases | Download directly from Guardian Project's GitHub releases. | https://github.com/guardianproject/orbot-apple/releases |
+| App Store       | Install from the App Store.                                | https://apps.apple.com/us/app/orbot/id1609461599        |
+
+After installing Orbot, the usage is fairly straightforward: you add your bridges if needed and tap "Connect."
+
+![Orbot Screenshot](/pictures/Orbot_screenshot.jpg)
+
+If you have created your own bridges and want to use those instead of public bridges, consider the option "Custom bridges" and paste the bridge lines there. Otherwise, the app will provide you bridges from BridgeDB if you use other options.
 
 ---
 
