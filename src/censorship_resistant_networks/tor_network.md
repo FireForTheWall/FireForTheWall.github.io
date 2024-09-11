@@ -143,11 +143,106 @@ After starting Tor, it will create a SOCKS5 and SOCKS4 proxy on the address `127
 
 #### Windows
 
-WIP
+To use C Tor on Windows, it would be easier to use Tor's Expert Bundle [^7], as it contains other pluggable transports like Snowflake and Lyrebird, along with the geoip files needed for Tor to operate.
 
-#### MacOs
+You can download the Tor Expert Bundle package for Windows using the link below:
 
-WIP
+[https://www.torproject.org/download/tor/](https://www.torproject.org/download/tor/)
+
+Then extract the downloaded ZIP file to a directory, for example: `C:\Tor`
+
+For the obfs4proxy, since Windows doesn’t have package managers like Linux, you'll need to manually build obfs4proxy. For that, you'd need to install Go and Git first:
+
+| Package         | URL                                                          |
+| --------------- | ------------------------------------------------------------ |
+| Go for Windows  | [https://go.dev/dl/](https://go.dev/dl/)                     |
+| Git for Windows | [https://git-scm.com/download/win](https://git-scm.com/download/win) |
+
+After you install the Go and Git packages, you can build and install obfs4proxy using PowerShell:
+
+```powershell
+git clone https://gitlab.com/yawning/obfs4.git
+cd obfs4
+go build -o obfs4proxy.exe ./obfs4proxy
+move obfs4proxy.exe C:\Tor\obfs4proxy.exe
+```
+
+Now that you have everything ready, it's time to move on to configuring Tor:
+
+1. The `torrc` file is located in the directory where you extracted the Tor Expert Bundle. Open it using any editor you like.
+
+2. Add the following lines at the end of the file, replacing `<Bridge You Retrieved from BridgeDB>` with actual obfs4 bridges from Tor BridgeDB:
+
+   ````
+   UseBridges 1
+   Bridge <Bridge You Retrieved from BridgeDB 1>
+   Bridge <Bridge You Retrieved from BridgeDB 2>
+   Bridge <Bridge You Retrieved from BridgeDB 3>
+   ClientTransportPlugin obfs4 exec C:\Tor\obfs4proxy.exe
+   ````
+
+3. To start the Tor service, use PowerShell and navigate to the Tor directory:
+
+   ```powershell
+   cd C:\Tor
+   ```
+
+4. **Start the Tor process**:
+
+   ```powershell
+   tor.exe -f "C:\Tor\Data\Tor\torrc"
+   ```
+
+   Once Tor is running, it will create a SOCKS5 proxy at `127.0.0.1:9050`. You can configure your system or applications to use this proxy to route traffic through Tor.
+
+#### macOS
+
+The installation process for C Tor on macOS is quite similar to Linux; it should be installed using a package manager:
+
+| Package Manager              | Command                 |
+| ---------------------------- | ----------------------- |
+| [Homebrew](https://brew.sh/)  | `sudo brew install tor` |
+| MacPorts                     | `sudo port install tor`  |
+
+If you don't have the Homebrew package manager, install it using the command below:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+The `obfs4proxy` package is also available in Homebrew, and you can install it using the command below:
+
+```bash
+brew install obfs4proxy
+```
+
+After you have both C Tor and obfs4proxy installed, you can configure the torrc file, which is typically located at `/usr/local/etc/tor/torrc`:
+
+1. Open the file with root permission using any editor you like:
+
+   ```bash
+   sudo nano /usr/local/etc/tor/torrc
+   ```
+
+2. **Add the following lines at the end of the file**, replacing `<Bridge You Retrieved from BridgeDB>` with your actual obfs4 bridges from BridgeDB. Then **save the file** and exit the editor.
+
+   ```
+   UseBridges 1
+   Bridge <Bridge You Retrieved from BridgeDB 1>
+   Bridge <Bridge You Retrieved from BridgeDB 2>
+   Bridge <Bridge You Retrieved from BridgeDB 3>
+   ClientTransportPlugin obfs4 exec /usr/local/bin/obfs4proxy
+   ```
+
+3. Restart the Tor service:
+
+   ```bash
+   brew services start tor
+   ```
+
+   Alternatively, you can start Tor manually by running the command `tor`.
+
+Once Tor is running, it will create a SOCKS5 and SOCKS4 proxy at `127.0.0.1:9050`. You can configure your system or applications to use this proxy to bypass censorship.
 
 ### Tor Browser
 
@@ -169,10 +264,10 @@ To use Orbot, you first need to download and install it for your device architec
 
 Here is a list for installing Orbot on **iOS Devices**:
 
-| Source          | Description                                                | URL                                                     |
-| --------------- | ---------------------------------------------------------- | ------------------------------------------------------- |
-| Github Releases | Download directly from Guardian Project's GitHub releases. | https://github.com/guardianproject/orbot-apple/releases |
-| App Store       | Install from the App Store.                                | https://apps.apple.com/us/app/orbot/id1609461599        |
+| Source          | Description                                                | URL                                                          |
+| --------------- | ---------------------------------------------------------- | ------------------------------------------------------------ |
+| Github Releases | Download directly from Guardian Project's GitHub releases. | [https://github.com/guardianproject/orbot-apple/releases](https://github.com/guardianproject/orbot-apple/releases) |
+| App Store       | Install from the App Store.                                | [https://apps.apple.com/us/app/orbot/id1609461599](https://apps.apple.com/us/app/orbot/id1609461599) |
 
 After installing Orbot, the usage is fairly straightforward: you add your bridges if needed and tap "Connect."
 
@@ -188,3 +283,4 @@ If you have created your own bridges and want to use those instead of public bri
 [^4]: Announcing Arti: [https://blog.torproject.org/announcing-arti/](https://blog.torproject.org/announcing-arti/)
 [^5]: Archlinux Wiki on installing tor: [https://wiki.archlinux.org/title/Tor](https://wiki.archlinux.org/title/Tor)
 [^6]: Gentoo Wiki on installing tor: [https://wiki.gentoo.org/wiki/Tor](https://wiki.gentoo.org/wiki/Tor)
+[^7]: Tor's Expert Bundle: [https://www.torproject.org/download/tor/](https://www.torproject.org/download/tor/)
