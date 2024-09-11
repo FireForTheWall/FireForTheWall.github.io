@@ -246,7 +246,25 @@ Once Tor is running, it will create a SOCKS5 and SOCKS4 proxy at `127.0.0.1:9050
 
 ### Tor Browser
 
-WIP
+To install Tor Browser for your operating system, go to Tor's download page and download it for your OS:
+
+[https://www.torproject.org/download/](https://www.torproject.org/download/)
+
+For Windows, macOS, and Android, it would be a `.exe`, `.dmg`, and `.apk` file, which can be installed easily. However, for Linux, it is a compressed `.tar.xz` file, which you need to extract and run the executable file inside.
+
+After opening the Tor Browser, you will see a browser like this:
+
+![TorBrowser's Startpage Screenshot](/pictures/TorBrowser-screenshot.jpg)
+
+Here, you can click on the "Configure a Connection" button and add your bridges. Bridges can be added from the built-in bridges:
+
+![TorBrowser's BuiltIn Bridges Screenshot](/pictures/TorBrowser_BuiltInBridge-screenshot.jpg)
+
+Or from custom bridges retrieved from BridgeDB:
+
+![TorBrowser's Custom Bridges Screenshot](/pictures/TorBrowser_CustomBridge-screenshot.jpg)
+
+When you have added your bridges, you can return to the start page and click on "Connect." After a successful connection, you can either use it as a censorship-free browser or use a SOCKS proxy outside the browser at `127.0.0.1:9150`. Note that this SOCKS proxy is only available as long as your Tor Browser is open, running, and connected.
 
 ### Orbot
 
